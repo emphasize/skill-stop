@@ -1,3 +1,5 @@
+Altered skill
+
 # <img src='https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/cog.svg' card_color='#40DBB0' width='50' height='50' style='vertical-align:bottom'/> System
 General system control
 
@@ -13,8 +15,8 @@ directly, rather it emits messages for the device creator to capture.
 * "Stop"
 * "Reboot"
 * "Turn off"
-* "Allow remote login"
-* "Configure wifi"
+* "restart skills" (only german)
+* "restart skills with interface" (only german)
 
 ## Credits
 Mycroft AI (@MycroftAI)
