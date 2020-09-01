@@ -11,10 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+from os.path import dirname
 from adapt.intent import IntentBuilder
 from mycroft.messagebus.message import Message
 from mycroft.skills.core import MycroftSkill, intent_handler, intent_file_handler
+import os
+import time
 
 
 class StopSkill(MycroftSkill):
@@ -34,24 +36,24 @@ class StopSkill(MycroftSkill):
     @intent_file_handler("reboot.intent")
     def handle_reboot(self, event):
         if self.ask_yesno("confirm.reboot") == "yes":
-            self.bus.emit(Message("system.reboot"))
+            os.system("mycroft-stop")
+            time.sleep(10)
+            os.system("systemctl reboot")
 
     @intent_file_handler("shutdown.intent")
     def handle_shutdown(self, event):
         if self.ask_yesno("confirm.shutdown") == "yes":
-            self.bus.emit(Message("system.shutdown"))
+            os.system("mycroft-stop")
+            time.sleep(10)
+            os.system("systemctl poweroff")
 
-    @intent_file_handler('wifi.setup.intent')
-    def handle_wifi_setup(self, event):
-        self.bus.emit(Message("system.wifi.setup"))
+    @intent_file_handler('skill_reboot.intent')
+    def handle_skill_reboot(self, event):
+        os.system("mycroft-stop && mycroft-start all")
 
-    @intent_file_handler('ssh.enable.intent')
-    def handle_ssh_enable(self, event):
-        self.bus.emit(Message("system.ssh.enable"))
-
-    @intent_file_handler('ssh.disable.intent')
-    def handle_ssh_disable(self, event):
-        self.bus.emit(Message("system.ssh.disable"))
+    @intent_file_handler('skill_reboot_cli.intent')
+    def handle_skill_reboot_cli(self, event):
+        os.system("mycroft-stop && mycroft-start all && mycroft-cli-client")
 
 def create_skill():
     return StopSkill()

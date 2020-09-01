@@ -1,5 +1,5 @@
-ausschalten
-fahre herunter
-ausschalten
-herunterfahren
-ausschalten
+(shutdown|shut down)
+fahre (runter|herunter)
+schalte (dich|mycroft) aus
+zieh(e|) den stecker
+(abschalten|ausschalten)
